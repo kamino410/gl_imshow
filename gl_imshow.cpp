@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-void (size_t img_width, size_t img_height)
-  :img_width(img_width), img_height(img_height) {}
+GL2dImagePanel::GL2dImagePanel(size_t img_width, size_t img_height)
+    : img_width(img_width), img_height(img_height) {}
 
 void GL2dImagePanel::init() {
   program.compileShader("myshader.vert", GLSLShaderType::VERTEX);
@@ -69,8 +69,6 @@ void GL2dImagePanel::init() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.cols, img.rows, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                 img.data);
     glBindTexture(GL_TEXTURE_2D, 0);
   }
 }
@@ -96,4 +94,3 @@ void GL2dImagePanel::draw() {
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eao);
   glDrawElements(GL_TRIANGLES, 3 * 2, GL_UNSIGNED_INT, 0);
 }
-

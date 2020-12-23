@@ -14,6 +14,8 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
+#include "gl_imshow.hpp"
+
 void keycallback(GLFWwindow *window, int key, int scancode, int action, int mods) {
   if (action == GLFW_PRESS || action == GLFW_REPEAT) {
     if (key == GLFW_KEY_ESCAPE) { glfwSetWindowShouldClose(window, GLFW_TRUE); }
@@ -61,6 +63,9 @@ int main() {
   glfwSwapInterval(0);
   glfwSetKeyCallback(window, keycallback);
 
+  GL2dImagePanel imgPanel(1920, 1080);
+  imgPanel.init();
+
   cv::Mat img = cv::imread("x-pat.png");
   cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
 
@@ -72,7 +77,8 @@ int main() {
     glClearColor(0.5, 0.5, 0.5, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    
+    imgPanel.updateImage(img);
+    imgPanel.draw();
 
     glfwSwapBuffers(window);
     glfwPollEvents();
@@ -89,4 +95,3 @@ int main() {
 
   return 0;
 }
-
