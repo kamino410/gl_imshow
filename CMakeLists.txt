@@ -16,7 +16,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(gl_imshow CXX)
 
-add_executable(main_app main.cpp glsl_program_wrapper.cpp)
+add_executable(main_app main.cpp gl_imshow.cpp glsl_program_wrapper.cpp)
 
 find_package(OpenCV REQUIRED)
 target_include_directories(main_app PUBLIC ${OpenCV_INCLUDE_DIRS})
@@ -39,3 +39,4 @@ endif()
 target_include_directories(main_app PUBLIC ${GLEW_INCLUDE_DIR})
 target_link_directories(main_app PUBLIC ${GLEW_LIBRARY_DIR})
 target_link_libraries(main_app glew32 glew32s)
+
