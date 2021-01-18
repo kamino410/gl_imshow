@@ -35,10 +35,14 @@ int main() {
 
   int num_of_monitors;
   glfwWindowHint(GLFW_AUTO_ICONIFY, GL_FALSE);
+  
+  // Window mode
   // GLFWwindow *window = glfwCreateWindow(700, 500, "test", NULL, NULL);
-  // -- Display on full screen --
+  
+  // Fullscreen mode
   GLFWmonitor **monitors = glfwGetMonitors(&num_of_monitors);
   GLFWwindow *window = glfwCreateWindow(1920, 1080, "test", monitors[0], NULL);
+  
   if (!window) {
     std::cerr << "Failed to create GL window." << std::endl;
     glfwTerminate();
@@ -66,6 +70,9 @@ int main() {
   GL2dImagePanel imgPanel(1920, 1080);
   imgPanel.init();
 
+  // In the OpenGL's default configuration, byte size of the columns of the image must be divisible by 4.
+  // You might change the configuration or the image format to RGBA.
+  // Details: https://www.khronos.org/opengl/wiki/Common_Mistakes#Texture_upload_and_pixel_reads
   cv::Mat img = cv::imread("x-pat.png");
   cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
 
